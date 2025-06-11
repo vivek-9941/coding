@@ -1,8 +1,6 @@
-// src/pages/OAuthSuccess.jsx
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
-
 const OAuthSuccess = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -10,32 +8,37 @@ const OAuthSuccess = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
+        console.log(token);
+        localStorage.setItem('token', token); // Store only after successful check
+        const checkUser = async (token) => {
+            try {
+                const response = await axios.post(
+                    'http://localhost:8080/auth/user/present',
+                    {},
+                    { headers: { Authorization: `Bearer ${token}` }
+                    });
+
+
+                if (response.status === 200) {
+                    navigate('/dashboard');
+                }
+            } catch (error) {
+                console.error("User check failed:", error);
+                if (error.response?.status === 404) {
+                    console.log("user not found "+ error.response.data)
+                    const email = error.response.data;
+                    navigate('/login', { state: { email } });
+                } else {
+                    localStorage.removeItem('token'); // Clear invalid token
+                    navigate('/login');
+                }
+            }
+        };
 
         if (token) {
-            localStorage.setItem('token', token);
-            // Optionally decode it and set user in context
-            // Redirect to dashboard or homepage
-            const checkuser = async (token) =>{
-              try{
-
-               const response =await axios.post('http://localhost:8000/auth/user/present', {} , {headers: {
-                       Authorization: `Bearer ${token}` // send token in header
-                   }});
-                  if (response.status === 200) {
-                      console.log("✅ User exists:", response.data);
-                  }
-              }
-              catch (error) {
-                  if(error.response && error.response.status === 404){
-                      navigate('/login');
-                  }
-                  else{
-                      console.log(error.response);
-                  }
-              }
-
-            }
-            // navigate('/dashboard'); // or your protected route
+            checkUser(token);
+        } else {
+            navigate('/login');
         }
     }, [location, navigate]);
 
