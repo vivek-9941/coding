@@ -20,6 +20,9 @@ const Register = () => {
             username: "",
             password: "",
             email: prefillEmail ,
+            cchandle:"",
+            cfhandle:"",
+            lchandle:"",
         },
     });
 
@@ -47,7 +50,7 @@ const Register = () => {
             }
             else {
                 toast.success("User registered successfully.");
-
+                navigate("/dashboard");
             }
 
         } catch (error) {
@@ -99,7 +102,9 @@ const Register = () => {
                     <div>
                         <input
                             type="email"
-                            placeholder="Email"
+                            placeholder={prefillEmail}
+                            value={prefillEmail}
+                            disabled={true}
                             {...register("email", { required: "Email is required" })}
                             className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 bg-white text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600"
                         />
@@ -107,6 +112,37 @@ const Register = () => {
                             <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                         )}
                     </div>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="CodeChef Handle"
+                            {...register("cchandle",{required: false})}
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 bg-white text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600"
+                        />
+                        {errors.cchandle && (
+                            <p className="text-red-500 text-sm mt-1">{errors.cchandle.message}</p>
+                        )}
+                    </div> <div>
+                    <input
+                        type="text"
+                        placeholder="Codeforces"
+                        {...register("cfhandle", { required: "cfhandle is required" })}
+                        className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 bg-white text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600"
+                    />
+                    {errors.cfhandle && (
+                        <p className="text-red-500 text-sm mt-1">{errors.cfhandle.message}</p>
+                    )}
+                </div> <div>
+                    <input
+                        type="text"
+                        placeholder="Leetcode"
+                        {...register("lchandle", { required: "leetcode handle is required" })}
+                        className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 bg-white text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600"
+                    />
+                    {errors.lchandle && (
+                        <p className="text-red-500 text-sm mt-1">{errors.lchandle.message}</p>
+                    )}
+                </div>
                     <button
                         type="submit"
                         disabled={isSubmitting}
