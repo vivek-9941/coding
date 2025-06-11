@@ -1,9 +1,12 @@
 import { useTheme } from '../context/ThemeContext';
 import "@fontsource-variable/inter";
 import ThemeToggle from "./ThemeToggle.jsx";
+import {checkAuthSync, isAuthenticated} from "../Utility/TokenValidation.js";
 
 const LandingPage = () => {
+
     const { theme } = useTheme();
+    const isAuth = checkAuthSync(); // Use synchronous check
 
     return (
         <div className={`min-h-screen font-sans ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'} transition-colors duration-300`} style={{ fontFamily: '"Inter Variable", sans-serif' }}>
@@ -22,13 +25,14 @@ const LandingPage = () => {
                     <button>Help</button>
                     <button>EN</button>
                 </nav>
-
                 <div className="flex gap-4">
-                    <a href="http://localhost:8080/oauth2/authorization/google">
-                        <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700">
-                            Continue with Google
-                        </button>
-                    </a>
+                    {!isAuth && (
+                        <a href="http://localhost:8080/oauth2/authorization/google">
+                            <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700">
+                                Continue with Google
+                            </button>
+                        </a>
+                    )}
                     <ThemeToggle />
                 </div>
             </header>
