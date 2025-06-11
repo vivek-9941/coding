@@ -1,14 +1,14 @@
 import React, {useEffect} from "react";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import ThemeToggle from "./ThemeToggle.jsx";
 
 const Register = () => {
     const location = useLocation();
     const prefillEmail = location.state?.email;
-
+    const navigate = useNavigate();
     useEffect(() => {console.log(prefillEmail)},[])
     const {
         register,
@@ -43,8 +43,13 @@ const Register = () => {
             );
             if(response.status === 208){
                 toast("already present user")
+                navigate("/dashboard");
             }
-            else toast.success("User registered successfully.");
+            else {
+                toast.success("User registered successfully.");
+
+            }
+
         } catch (error) {
             if (error.response?.status === 401) {
                 // Token is invalid/expired - initiate OAuth flow
