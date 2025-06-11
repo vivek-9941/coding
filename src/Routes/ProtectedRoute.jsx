@@ -1,11 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import {isAuthenticated} from "../Utility/TokenValidation.js";
  // your utility
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = () => {
     if (!isAuthenticated()) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
-    return children;
+    return <Outlet />;
 };
+
 export default ProtectedRoute;
