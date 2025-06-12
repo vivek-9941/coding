@@ -18,7 +18,6 @@ const OAuthSuccess = () => {
                     { headers: { Authorization: `Bearer ${token}` }
                     });
 
-
                 if (response.status === 200) {
                     navigate('/dashboard');
                 }
