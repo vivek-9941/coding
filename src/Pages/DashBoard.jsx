@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import {PlatformData} from "../hooks/PlatformData.jsx";
 const Dashboard = () => {
-    return (
-        <div className="p-1 text-gray-900 dark:text-white">
-            <h1 className="text-2xl font-bold">Dashboard</h1>
-        </div>
-    );
+
+return (
+
+    <PlatformData/>
+)
 };
 
 export default Dashboard;
