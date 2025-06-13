@@ -1,13 +1,10 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
-import {PlatformData} from "../hooks/PlatformData.jsx";
-import ThemeToggle from "../Components/ThemeToggle.jsx";
-const Dashboard = () => {
-
-return (
-<div>
- this si dashboard
-</div>
-)
+import React from "react";
+import OverallSummary from "../Components/DashBoardComponents/OverallSummary.jsx";
+const Dashboard = ({platform}) => {
+ if (platform === "Overall") return <OverallSummary />;
+ // if (platform === "LeetCode") return < />;
+ // if (platform === "Codeforces") return < />;
+ // if (platform === "CodeChef") return < />;
 };
 
 export default Dashboard;
