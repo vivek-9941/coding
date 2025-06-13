@@ -6,18 +6,19 @@ import OAuthSuccess from "../Components/OAuthSuccess.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Register from "../Components/Register.jsx";
 import NotFound from "../Pages/NotFound.jsx";
+import DashBoardLayout from "../Components/DashBoardLayout.jsx";
 
 const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/oauth-success" element={<OAuthSuccess/>}/>
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound/>}/>
 
             {/* Protected Routes */}
-            <Route element={<ProtectedRoute />}>
-            <Route path="/login" element={<Register/>}/>
-                <Route path="/dashboard" element={<DashBoard/>}/>
+            <Route element={<ProtectedRoute/>}>
+                <Route path="/login" element={<Register/>}/>
+                <Route path="/dashboardlayOut" element={<DashBoardLayout/>}/>
             </Route>
         </Routes>
     );
