@@ -1,10 +1,12 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import {PlatformData} from "../hooks/PlatformData.jsx";
+import ThemeToggle from "../Components/ThemeToggle.jsx";
 const Dashboard = () => {
 
 return (
-
-    <PlatformData/>
+<div>
+ this si dashboard
+</div>
 )
 };
 
