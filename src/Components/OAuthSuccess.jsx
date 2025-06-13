@@ -19,7 +19,7 @@ const OAuthSuccess = () => {
                     });
 
                 if (response.status === 200) {
-                    navigate('/dashboard');
+                    navigate('/dashboardlayOut');
                 }
             } catch (error) {
                 console.error("User check failed:", error);
