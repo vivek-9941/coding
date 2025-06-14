@@ -35,6 +35,7 @@ const dashBoardLayout = () =>{
 
                 <main className="p-6 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white overflow-y-auto flex" >
                     <Dashboard platform = {platform}/>
+                   
                 </main>
             </div>
         </div>
